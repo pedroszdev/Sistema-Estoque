@@ -1,0 +1,16 @@
+[{
+    "Código": 1,
+    "Nome": "Pão",
+    "Quantidade": 13,
+    "Preço": 0.98
+},{
+    "Código": 2,
+    "Nome": "Carro",
+    "Quantidade": 4,
+    "Preço": 109.99
+},{
+    "Código": 3,
+    "Nome": "Açucar",
+    "Quantidade": 1,
+    "Preço": 5.9
+}]

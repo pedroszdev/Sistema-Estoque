@@ -1,3 +1,5 @@
+import json
+
 def menu():
     print('==== SISTEMA DE ESTOQUE ====')
     print('1- Cadastrar produto')
@@ -12,20 +14,25 @@ def cadastrar_produto():
     novos_produtos={}
     codigo=input('Digite o código do novo produto:')
     nome=input('Digite o nome do novo produto: ')
-    quantidade=input('Digite a quantidade do novo produto')
+    quantidade=input('Digite a quantidade do novo produto: ')
     preco=input('Digite o preço desse novo produto: ')
     novos_produtos['Código']=int(codigo)
-    novos_produtos['Nome']=nome
+    novos_produtos['Nome']=nome.capitalize()
     novos_produtos['Quantidade']=int(quantidade)
     novos_produtos['Preço']=float(preco)
     produtos.append(novos_produtos)
+    with open(caminho, 'a', encoding='UTF-8' ) as arquivo:
+        json.dump(novos_produtos, arquivo, ensure_ascii=False, indent=4)
 
 def listar_produtos():
-    print('-'*45)
-    print('Código  | Nome        | Quantidade  | Preço')
-    print('-'*45)
-    for items in produtos:
-        print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
+    if len(produtos)<1:
+        print('Não existe produtos no momento')
+    else:    
+        print('-'*45)
+        print('Código  | Nome        | Quantidade  | Preço')
+        print('-'*45)
+        for items in produtos:
+            print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
 
 def atualizar_produto():
     resp=input('Qual produto você quer atualizar? [Nome] ')
@@ -69,8 +76,13 @@ def remover_produto():
         if resp==items['Nome']:
             del items
 
-produtos=[]
 
+caminho='Estoque.json'
+try:
+    with open(caminho, 'r', encoding='UTF-8') as arquivo:
+        produtos=[json.load(arquivo)]
+except:
+    produtos=[]
 
 while True:
     menu()
