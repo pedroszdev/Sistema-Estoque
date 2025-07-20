@@ -21,8 +21,7 @@ def cadastrar_produto():
     novos_produtos['Quantidade']=int(quantidade)
     novos_produtos['Preço']=float(preco)
     produtos.append(novos_produtos)
-    with open(caminho, 'w', encoding='UTF-8' ) as arquivo:
-        json.dump(produtos, arquivo, ensure_ascii=False, indent=4)
+    atualizar_json()
 
 def listar_produtos():
     if len(produtos)<1:
@@ -35,9 +34,9 @@ def listar_produtos():
             print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
 
 def atualizar_produto():
-    resp=input('Qual produto você quer atualizar? [Nome] ')
+    resp=input('Qual produto você quer atualizar? [Nome] ').capitalize()
     for items in produtos:
-        if items['Nome']==resp:
+        if resp==items['Nome']:
             atualizar_oque=input('O que você quer atualizar? ').capitalize()
             if atualizar_oque=='Código':
                 codigo_novo=input('Digite o código novo: ')
@@ -53,6 +52,13 @@ def atualizar_produto():
                 items['Preço']=float(preco_novo)
             else:
                 print('Essa categoria não existe')
+    else:
+        print('Esse produto não existe')
+    atualizar_json()
+
+def atualizar_json():
+    with open(caminho, 'w', encoding='UTF-8' ) as arquivo:
+        json.dump(produtos, arquivo, ensure_ascii=False, indent=4)
 
 def buscar_produto():
     resp=input('Qual produto você quer buscar? ').capitalize()
@@ -78,10 +84,7 @@ def remover_produto():
         if resp==produto['Nome']:
             print(f'o {produto['Nome']} foi removido')
             del produtos[i]
-            with open(caminho, 'w', encoding='UTF-8' ) as arquivo:
-                json.dump(produtos, arquivo, ensure_ascii=False, indent=4)
-            
-
+            atualizar_json()            
 
 caminho='Estoque.json'
 try:
