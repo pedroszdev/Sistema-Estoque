@@ -1,4 +1,7 @@
 import json
+from time import sleep
+from os import system, name
+
 
 def menu():
     print('==== SISTEMA DE ESTOQUE ====')
@@ -32,6 +35,8 @@ def listar_produtos():
         print('-'*45)
         for items in produtos:
             print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
+        print('-'*45)
+        print(f'Total de produtos cadastrados: {len(produtos)}')
 
 def atualizar_produto():    
     resp=input('Qual produto você quer atualizar? [Nome] ').capitalize()
@@ -82,7 +87,17 @@ def remover_produto():
         if resp==produto['Nome']:
             print(f'o {produto['Nome']} foi removido')
             del produtos[i]
-            atualizar_json()            
+            atualizar_json()    
+            return        
+    else:
+        print('Produto não encontrado. Nenhum item foi removido.')
+
+def limpar_tela():
+    if name == 'nt': 
+        return system('cls')
+    else:               
+        return system('clear')
+
 
 caminho='Estoque.json'
 try:
@@ -95,6 +110,7 @@ except:
 while True:
     menu()
     resp=input('Escolha uma opção: ')
+    limpar_tela()
     if resp=='1':
         cadastrar_produto()
     elif resp=='2':
@@ -109,4 +125,4 @@ while True:
         break
     else:
         print('Você digitou a opção errada')
-        continue
+    sleep(0.5)    
