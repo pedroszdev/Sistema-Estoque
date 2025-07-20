@@ -1,4 +1,4 @@
-[
+produtos=[
     {
         "Código": 1,
         "Nome": "Queijo",
@@ -10,6 +10,12 @@
         "Nome": "Morango",
         "Quantidade": 5,
         "Preço": 6.0
+    },
+    {
+        "Código": 3,
+        "Nome": "Uva",
+        "Quantidade": 3,
+        "Preço": 22.0
     },
     {
         "Código": 4,
@@ -24,3 +30,7 @@
         "Preço": 3.0
     }
 ]
+
+for c,item in enumerate(produtos):
+    print(c, item)
+print(produtos[0])

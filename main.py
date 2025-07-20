@@ -74,10 +74,12 @@ def buscar_produto():
 
 def remover_produto():
     resp=input('Qual produto você quer remover? [Nome] ').capitalize()
-    for items in produtos:
-        if resp==items['Nome']:
-            print(f'o {items['Nome']} foi removido')
-            del items
+    for i, produto in enumerate(produtos):
+        if resp==produto['Nome']:
+            print(f'o {produto['Nome']} foi removido')
+            del produtos[i]
+            with open(caminho, 'w', encoding='UTF-8' ) as arquivo:
+                json.dump(produtos, arquivo, ensure_ascii=False, indent=4)
             
 
 
