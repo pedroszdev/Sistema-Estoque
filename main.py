@@ -33,7 +33,7 @@ def listar_produtos():
         for items in produtos:
             print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
 
-def atualizar_produto():
+def atualizar_produto():    
     resp=input('Qual produto você quer atualizar? [Nome] ').capitalize()
     for items in produtos:
         if resp==items['Nome']:
@@ -42,7 +42,7 @@ def atualizar_produto():
                 codigo_novo=input('Digite o código novo: ')
                 items['Código']=int(codigo_novo)
             elif atualizar_oque=='Nome':
-                nome_novo=input('Digite o nome novo: ')
+                nome_novo=input('Digite o nome novo: ').capitalize()
                 items['Nome']=nome_novo
             elif atualizar_oque=='Quantidade':
                 qnt_novo=input('Digite a quantidade nova: ')
@@ -52,8 +52,6 @@ def atualizar_produto():
                 items['Preço']=float(preco_novo)
             else:
                 print('Essa categoria não existe')
-    else:
-        print('Esse produto não existe')
     atualizar_json()
 
 def atualizar_json():

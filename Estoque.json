@@ -1,26 +1,8 @@
 [
     {
-        "Código": 1,
-        "Nome": "Queijo",
-        "Quantidade": 4,
-        "Preço": 15.0
-    },
-    {
         "Código": 2,
-        "Nome": "Morango",
-        "Quantidade": 5,
-        "Preço": 6.0
-    },
-    {
-        "Código": 4,
-        "Nome": "Carro",
+        "Nome": "Clara",
         "Quantidade": 1,
-        "Preço": 100.0
-    },
-    {
-        "Código": 5,
-        "Nome": "Maça",
-        "Quantidade": 1,
-        "Preço": 3.0
+        "Preço": 1000.0
     }
 ]
