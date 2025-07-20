@@ -21,8 +21,8 @@ def cadastrar_produto():
     novos_produtos['Quantidade']=int(quantidade)
     novos_produtos['Preço']=float(preco)
     produtos.append(novos_produtos)
-    with open(caminho, 'a', encoding='UTF-8' ) as arquivo:
-        json.dump(novos_produtos, arquivo, ensure_ascii=False, indent=4)
+    with open(caminho, 'w', encoding='UTF-8' ) as arquivo:
+        json.dump(produtos, arquivo, ensure_ascii=False, indent=4)
 
 def listar_produtos():
     if len(produtos)<1:
@@ -61,28 +61,33 @@ def buscar_produto():
         for items in produtos:
             if resp==items['Código']:
                 print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
-            else:
-                print('Esse código não existe')
+                return
+        else:
+            print('Esse código não existe')
     except:
         for items in produtos:
             if resp==items['Nome']:
                 print(f'{items['Código']:<7} | {items['Nome']:<11} | {items['Quantidade']:<11} | {items['Preço']}')
-            else:
-                print('Esse produto não existe')
+                return
+        else:
+            print('Esse produto não existe')
 
 def remover_produto():
     resp=input('Qual produto você quer remover? [Nome] ').capitalize()
     for items in produtos:
         if resp==items['Nome']:
+            print(f'o {items['Nome']} foi removido')
             del items
+            
 
 
 caminho='Estoque.json'
 try:
     with open(caminho, 'r', encoding='UTF-8') as arquivo:
-        produtos=[json.load(arquivo)]
+        produtos=json.load(arquivo)
 except:
     produtos=[]
+
 
 while True:
     menu()
