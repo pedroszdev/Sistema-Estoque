@@ -18,6 +18,7 @@ cursor.execute(
     'PRIMARY KEY (Código)'
     ')'
 )
+
 conexao.commit()
 cursor.close()
 conexao.close()
@@ -47,6 +48,7 @@ def atualizar_codigo(codigo, codigo_novo):
         'SET Código=? '
         'WHERE Código=? '
     )
+
     cursor.execute(comando,(codigo_novo,codigo))
     conexao.commit()
     cursor.close()
@@ -61,6 +63,7 @@ def atualizar_nome(nome, nome_novo):
         'SET Nome=? '
         'WHERE Nome=? '
     )
+
     cursor.execute(comando,(nome_novo, nome))
     conexao.commit()
     cursor.close()
@@ -75,6 +78,7 @@ def atualizar_quantidade(qnt, qnt_novo):
         'SET Quantidade=? '
         'WHERE Quantidade=? '
     )
+
     cursor.execute(comando,(qnt_novo, qnt))
     conexao.commit()
     cursor.close()
@@ -89,6 +93,7 @@ def atualizar_preco(preco, preco_novo):
         'SET Preço=? '
         'WHERE Preço=? '
     )
+
     cursor.execute(comando,(preco_novo, preco))
     conexao.commit()
     cursor.close()
@@ -102,6 +107,7 @@ def apagar_dados(nome):
         f'DELETE FROM {NOME_TABELA} '
         'WHERE Nome=? '
     )
+
     cursor.execute(comando,(nome,))
     conexao.commit()
     cursor.close()
@@ -115,7 +121,10 @@ def puxar_dados():
     comando=(
         f'SELECT * FROM {NOME_TABELA} '
     )
+
     cursor.execute(comando)
     resultados=cursor.fetchall()
     Produtos = [dict(linha) for linha in resultados]
-    return Produtos if len(Produtos)>1 else []
+
+    return Produtos if len(Produtos)>=1 else []
+

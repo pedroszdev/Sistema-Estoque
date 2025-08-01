@@ -15,3 +15,6 @@ Um sistema simples de controle de estoque feito em **Python** com banco de dados
 - 📁 Organização modular do código  
 
 ---
+### 📸 Exemplo no terminal
+![Exemplo no terminal](print.png)
+![Exemplo no arquivo SQLite](print.png)
